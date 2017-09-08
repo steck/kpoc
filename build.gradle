@@ -41,6 +41,8 @@ dependencies {
     // end::actuator[]
     testCompile("junit:junit")
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+
+    compile "com.h2database:h2:$h2Version"
 }
 compileKotlin {
     kotlinOptions {
