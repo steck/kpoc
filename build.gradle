@@ -7,12 +7,14 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.6.RELEASE")
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-noarg:$kotlin_version"
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'kotlin'
 apply plugin: "kotlin-spring"
+apply plugin: "kotlin-jpa"
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
@@ -35,6 +37,8 @@ dependencies {
         exclude module: "spring-boot-starter-tomcat"
     }
     compile("org.springframework.boot:spring-boot-starter-jetty")
+    compile "org.springframework.boot:spring-boot-starter-data-jpa"
+
     // end::jetty[]
     // tag::actuator[]
     compile("org.springframework.boot:spring-boot-starter-actuator")
@@ -43,6 +47,8 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
 
     compile "com.h2database:h2:$h2Version"
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: "$hibernateVersion"
+    compile group: 'org.hibernate', name: 'hibernate-core', version: "$hibernateVersion"
 }
 compileKotlin {
     kotlinOptions {
