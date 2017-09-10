@@ -25,3 +25,7 @@ hs_err_pid*
 kpoc.iml
 out/
 build/
+src/main/resources/resources/*.html
+src/main/resources/resources/*.js
+src/main/resources/resources/*.js.map
+src/main/resources/resources/*.ico
