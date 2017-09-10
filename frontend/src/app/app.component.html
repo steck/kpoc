@@ -1,0 +1,25 @@
+<div class="app">
+  <div class="blog-header">
+    <div class="container">
+      <h1 class="blog-title">{{title}}</h1>
+      <p class="lead blog-description">An example of kotlin/jpa/angular application</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 blog-main">
+        <div *ngFor="let post of posts" class="row">
+          <div class="blog-post">
+            <h2 class="blog-post-title">{{ post.header}}</h2>
+          </div>
+          <p> {{ post.body }} </p>
+          <p>
+            <a href="#">open comments</a>
+          </p>
+          <hr />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
