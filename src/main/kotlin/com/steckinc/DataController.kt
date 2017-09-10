@@ -15,4 +15,10 @@ class DataController(val dataService: DataService) {
     @PostMapping("/posts/{id}")
     fun comment(@PathVariable("id") id: Long, @RequestBody body: String): PostDto
             = dataService.addComment(id, body)
+
+    @PostMapping("/posts/new")
+    fun comment(@RequestBody post: NewPost): Long
+            = dataService.newPost(post.header, post.body)
 }
+
+data class NewPost(val header: String, val body: String)

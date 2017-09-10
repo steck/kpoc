@@ -49,6 +49,7 @@ dependencies {
     compile "com.h2database:h2:$h2Version"
     compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: "$hibernateVersion"
     compile group: 'org.hibernate', name: 'hibernate-core', version: "$hibernateVersion"
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonKotlinVersion"
 }
 compileKotlin {
     kotlinOptions {

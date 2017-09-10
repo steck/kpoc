@@ -3,6 +3,7 @@ package com.steckinc.services
 import com.steckinc.dtos.PostDto
 import com.steckinc.entity.Comment
 import com.steckinc.entity.CommentRepository
+import com.steckinc.entity.Post
 import com.steckinc.entity.PostRepository
 import org.springframework.stereotype.Service
 
@@ -20,5 +21,11 @@ class DataService(val postRepository: PostRepository) {
         val post = postRepository.findOneWithDependencies(id)
         post.comments.add(Comment(body = text, post = post))
         return  PostDto.fromPost(postRepository.saveAndFlush(post))
+    }
+
+    fun newPost(header: String, body: String): Long {
+        val post = Post(header = header, body = body)
+        val savedPost = postRepository.saveAndFlush(post)
+        return savedPost.id
     }
 }

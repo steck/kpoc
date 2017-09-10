@@ -19,4 +19,11 @@ export class PostService {
   public postComment(id: number | string, text: string): Observable<Post> {
     return this.http.post<Post>(`posts/${id}`, text);
   }
+
+  public createPost(header: string, body: string): Observable<number> {
+    return this.http.post<number>(`posts/new`, {
+      header: header,
+      body: body,
+    });
+  }
 }
