@@ -29,7 +29,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    LaddaModule,
+    LaddaModule.forRoot({style: "slide-left"}),
     RouterModule.forRoot(appRoutes, {useHash: true})
   ],
   providers: [PostService],
