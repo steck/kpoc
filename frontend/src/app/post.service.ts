@@ -12,7 +12,7 @@ export class PostService {
     return this.http.get<Post[]>("posts");
   }
 
-  public loadPostWithComments(id: number): Observable<Post> {
+  public loadPostWithComments(id: number | string): Observable<Post> {
     return this.http.get<Post>(`posts/${id}`);
   }
 }
