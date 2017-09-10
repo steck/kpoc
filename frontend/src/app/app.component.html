@@ -1,7 +1,11 @@
 <div class="app">
   <div class="blog-header">
     <div class="container">
-      <h1 class="blog-title">{{title}}</h1>
+      <h1 class="blog-title">
+        <a [routerLink]="['/posts']">
+        {{title}}
+        </a>
+      </h1>
       <p class="lead blog-description">An example of kotlin/jpa/angular application</p>
     </div>
   </div>

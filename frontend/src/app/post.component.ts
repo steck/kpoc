@@ -1,3 +1,5 @@
+import 'rxjs/add/operator/toPromise';
+
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PostService} from "./post.service";
 import {Post} from "./entity/post";
@@ -20,26 +22,50 @@ import {ActivatedRoute} from "@angular/router";
       <div *ngFor="let comment of post?.comments">
         <p> {{ comment.body }} </p>
       </div>
+      <div class="form-group">
+        <textarea class="form-control"
+                  id="comment"
+                  name="comment"
+                  rows="3"
+                  [(ngModel)]="text"></textarea>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary"
+                [disabled]="!text"
+                [ladda]="sending"
+                (click)="sendComment()">
+          Send comment
+        </button>
+      </div>
     </div>
   `,
   styleUrls: []
 })
-export class PostComponent implements OnInit, OnDestroy {
+export class PostComponent implements OnInit {
   public post: Post;
+  public text: string = "";
+  public sending: boolean = false;
 
-  private subscription: Subscription;
+  private id: string;
 
   constructor(private postService: PostService,
               private route: ActivatedRoute) {
   }
 
-  public ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get("id");
-    this.subscription = this.postService.loadPostWithComments(id)
-      .subscribe(data => this.post = data);
+  public async ngOnInit(): Promise<void> {
+    this.id = this.route.snapshot.paramMap.get("id");
+    this.post = await this.postService.loadPostWithComments(this.id).toPromise();
   }
 
-  public ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  public async sendComment() {
+    if (this.text) {
+      this.sending = true;
+      try {
+        this.post = await this.postService.postComment(this.id, this.text).toPromise();
+      } finally {
+        this.sending = false;
+        this.text = "";
+      }
+    }
   }
 }

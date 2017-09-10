@@ -8,6 +8,7 @@ import {FormsModule} from "@angular/forms";
 import {RouterModule, Routes} from '@angular/router';
 import {PostComponent} from "./post.component";
 import {PostsComponent} from "./posts.component";
+import {LaddaModule} from 'angular2-ladda';
 
 const appRoutes: Routes = [
   {path: 'posts', component: PostsComponent},
@@ -25,7 +26,8 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    LaddaModule,
+    RouterModule.forRoot(appRoutes, {useHash: true})
   ],
   providers: [PostService],
   bootstrap: [AppComponent]

@@ -15,4 +15,8 @@ export class PostService {
   public loadPostWithComments(id: number | string): Observable<Post> {
     return this.http.get<Post>(`posts/${id}`);
   }
+
+  public postComment(id: number | string, text: string): Observable<Post> {
+    return this.http.post<Post>(`posts/${id}`, text);
+  }
 }
