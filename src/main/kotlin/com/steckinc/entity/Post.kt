@@ -1,6 +1,7 @@
 package com.steckinc.entity
 
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.Query
 import javax.persistence.*
 
 @Entity
@@ -17,8 +18,11 @@ class Post(
         @Column(name = "id")
         var id: Long = 0,
 
-        @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
+        @OneToMany(mappedBy = "post")
         var comments: List<Comment> = emptyList()
 )
 
-interface PostRepository : JpaRepository<Post, Long>
+interface PostRepository : JpaRepository<Post, Long> {
+        @Query("select p from Post p inner join fetch p.comments c where p.id = ?1")
+        fun findOneWithDependencies(id: Long): Post
+}

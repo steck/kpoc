@@ -1,20 +1,16 @@
 package com.steckinc
 
-import com.steckinc.entity.Comment
-import com.steckinc.entity.CommentRepository
-import com.steckinc.entity.Post
-import com.steckinc.entity.PostRepository
+import com.steckinc.dtos.PostDto
+import com.steckinc.services.DataService
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class DataController (
-        val postRepository: PostRepository,
-        val commentRepository: CommentRepository) {
-
+class DataController(val dataService: DataService) {
     @GetMapping("/posts")
-    fun posts(): List<Post> = postRepository.findAll()!!;
+    fun posts(): List<PostDto> = dataService.loadAllPost()
 
-    @GetMapping("/comments")
-    fun comments(): List<Comment> = commentRepository.findAll()!!;
+    @GetMapping("/posts/{id}")
+    fun post(@PathVariable("id") id: Long): PostDto = dataService.loadWithComment(id)
 }
