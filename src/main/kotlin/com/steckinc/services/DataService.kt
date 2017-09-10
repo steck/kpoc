@@ -20,12 +20,12 @@ class DataService(val postRepository: PostRepository) {
     fun addComment(id: Long, text: String) : PostDto{
         val post = postRepository.findOneWithDependencies(id)
         post.comments.add(Comment(body = text, post = post))
-        return  PostDto.fromPost(postRepository.saveAndFlush(post))
+        return  PostDto.fromPost(postRepository.save(post))
     }
 
     fun newPost(header: String, body: String): Long {
         val post = Post(header = header, body = body)
-        val savedPost = postRepository.saveAndFlush(post)
+        val savedPost = postRepository.save(post)
         return savedPost.id
     }
 }
